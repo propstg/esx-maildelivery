@@ -4,14 +4,18 @@ TriggerEvent('esx:getSharedObject', function(obj)
     ESX = obj
 end)
 
-RegisterNetEvent('MailDelivery:DeliveryMade')
-AddEventHandler('MailDelivery:DeliveryMade', function(source, amount)
-    local player = ESX.GetPlayerFromId(source)
-    player.addMoney(amount)
+RegisterServerEvent('MailDelivery:DeliveryMade')
+AddEventHandler('MailDelivery:DeliveryMade', function(amount)
+    local _source = source
+
+    local player = ESX.GetPlayerFromId(_source)
+    player.addMoney(tonumber(amount))
 end)
 
-RegisterNetEvent('MailDelivery:VanRented')
-AddEventHandler('MailDelivery:VanRented', function(source, amount)
-    local player = ESX.GetPlayerFromId(source)
-    player.removeMoney(amount)
+RegisterServerEvent('MailDelivery:VanRented')
+AddEventHandler('MailDelivery:VanRented', function(amount)
+    local _source = source
+
+    local player = ESX.GetPlayerFromId(_source)
+    player.removeMoney(tonumber(amount))
 end)
